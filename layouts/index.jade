@@ -2,7 +2,10 @@
 html
   head
     title Морской бой
-    link(rel='stylesheet', href='/css/main.css')
+    if dev
+      link(rel='stylesheet', href='/css/main.css')
+    else
+      link(rel='stylesheet', href='/css/main.min.css')
     link(rel='shortcut icon', href='/img/favicon/favicon-grey-64.ico')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
 

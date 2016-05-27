@@ -8,16 +8,16 @@ module.exports = function (grunt) {
           paths: ['assets/less']
         },
         files: {
-          'dist/css/main.css': 'assets/less/main.less'
+          'build-dev/css/main.css': 'assets/less/main.less'
         }
       },
-      prod: {
+      build: {
         options: {
           paths: ['assets/less'],
           compress: true
         },
         files: {
-          'dist/css/main.css': 'assets/less/main.less'
+          'build/css/main.min.css': 'assets/less/main.less'
         }
       }
     },
@@ -27,31 +27,42 @@ module.exports = function (grunt) {
       options: {
         processors: [
           require('autoprefixer')({ browsers: ['last 2 versions'] }),
-          require('postcss-csso')({ comments: false })
+          require('cssnano')()
         ]
       },
       dev: {
-        src: 'dist/css/main.css'
+        src: 'build-dev/css/main.css'
       },
 
-      prod: {
-        src: 'dist/css/main.css'
+      build: {
+        src: 'build/css/main.min.css'
       }
     },
 
     requirejs: {
       // https://www.npmjs.com/package/grunt-requirejs
-      prod: {
+      build: {
         options: {
           almond: true,
-          baseUrl: 'dist/js',
-          mainConfigFile: 'dist/js/config.js',
+          baseUrl: 'assets/js',
+          mainConfigFile: 'assets/js/config.js',
           include: ['main'],
-          out: 'dist/js/main.min.js',
+          out: 'build/js/main.min.js',
           preserveLicenseComments: false
-          /* uncomment to debug */
-          // ,optimize: 'uglify2',
-          // generateSourceMaps: true
+        }
+      }
+    },
+
+    uglify: {
+      // https://github.com/gruntjs/grunt-contrib-uglify
+      offline_build: {
+        files: {
+          'build/offline.js': 'assets/js/offline.js'
+        }
+      },
+      build: {
+        files: {
+          'build/js/main.min.js': 'build/js/main.min.js'
         }
       }
     },
@@ -60,7 +71,7 @@ module.exports = function (grunt) {
       // https://www.npmjs.com/package/grunt-jade
       dev: {
         files: {
-          'dist': 'layouts/**/*.jade'
+          'build-dev': 'layouts/**/*.jade'
         },
         options: {
           pretty: true,
@@ -70,9 +81,9 @@ module.exports = function (grunt) {
           }
         }
       },
-      prod: {
+      build: {
         files: {
-          'dist': 'layouts/**/*.jade'
+          'build': 'layouts/**/*.jade'
         },
         options: {
           client: false,
@@ -88,31 +99,37 @@ module.exports = function (grunt) {
       fonts: {
         cwd: 'assets/fonts',
         src: [ '**' ],
-        dest: 'dist/fonts',
+        dest: 'build-dev/fonts',
+        expand: true
+      },
+      fonts_build: {
+        cwd: 'assets/fonts',
+        src: [ '**' ],
+        dest: 'build/fonts',
         expand: true
       },
       img: {
         cwd: 'assets/img',
         src: [ '**' ],
-        dest: 'dist/img',
+        dest: 'build-dev/img',
         expand: true
       },
-      js_dev: {
+      img_build: {
+        cwd: 'assets/img',
+        src: [ '**' ],
+        dest: 'build/img',
+        expand: true
+      },
+      js: {
         cwd: 'assets/js',
         src: [ '**' ],
-        dest: 'dist/js',
-        expand: true
-      },
-      css: {
-        cwd: 'assets/css',
-        src: [ '**' ],
-        dest: 'dist/css',
+        dest: 'build-dev/js',
         expand: true
       },
       offline: {
         cwd: 'assets/js',
         src: ['offline.js'],
-        dest: 'dist',
+        dest: 'build-dev',
         expand: true
       }
     },
@@ -124,7 +141,10 @@ module.exports = function (grunt) {
         stderr: true
       },
       dev: {
-        command: 'node server.js'
+        command: 'node server.js build-dev'
+      },
+      build: {
+        command: 'node server.js build'
       }
     },
 
@@ -135,13 +155,13 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'templates',
           src: '**/*.xml',
-          dest: 'dist/js/templates'
+          dest: 'assets/js/templates'
         }],
         options: {
           template: function (data) {
             return grunt.template.process(
               'define(function() { return <%= contents %> ; });',
-              {data: data}
+              { data: data }
             );
           }
         }
@@ -152,68 +172,45 @@ module.exports = function (grunt) {
       // https://www.npmjs.com/package/grunt-contrib-watch
       fest: {
         files: ['templates/**/*.xml'],
-        tasks: ['fest'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
+        tasks: ['fest', 'copy:js'],
+        options: { interrupt: true }
       },
       jade: {
         files: ['layouts/**/*.jade'],
         tasks: ['jade:dev'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
+        options: { interrupt: true }
       },
       less: {
         files: ['assets/less/**/*'],
         tasks: ['less:dev', 'postcss:dev'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
-      },
-      copy_fonts: {
-        files: ['assets/fonts/**/*'],
-        tasks: ['copy:fonts'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
+        options: { interrupt: true }
       },
       copy_img: {
         files: ['assets/img/**/*'],
         tasks: ['copy:img'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
+        options: { interrupt: true }
       },
-      copy_js_dev: {
+      copy_js: {
         files: ['assets/js/**/*'],
-        tasks: ['copy:js_dev', 'copy:offline'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
-      },
-      copy_css: {
-        files: ['assets/css/**/*'],
-        tasks: ['copy:css', 'postcss'],
-        options: {
-          interrupt: true,
-          atBegin: true
-        }
+        tasks: ['copy:js', 'copy:offline'],
+        options: { interrupt: true }
       }
     },
 
     concurrent: {
       // https://www.npmjs.com/package/grunt-concurrent
       dev: {
-        tasks: ['shell:dev', 'watch']
+        tasks: [
+          'shell:dev',
+          'watch'
+        ]
+      },
+      test: {
+        tasks: [
+        ]
       },
       options: {
+        limit: 2,
         logConcurrentOutput: true
       }
     },
@@ -223,7 +220,7 @@ module.exports = function (grunt) {
       options: {
         summaryOnly: true
       },
-      all: ['dist/test.html']
+      all: ['build-dev/test.html']
     }
   });
 
@@ -231,6 +228,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-fest');
   grunt.loadNpmTasks('grunt-jade');
@@ -245,9 +243,35 @@ module.exports = function (grunt) {
     grunt.log.ok(name, '[', passed,  '/', total, ']');
   });
 
-  grunt.registerTask('dev', ['concurrent:dev']);
-  grunt.registerTask('prod', ['fest', 'copy:css', 'less:prod', 'copy:fonts', 'copy:img', 'copy:js_dev', 'copy:offline', 'jade:prod', 'requirejs:prod', 'postcss:prod']);
-  grunt.registerTask('prod-server', ['prod', 'shell']);
-  grunt.registerTask('default', ['prod-server']);
-  grunt.registerTask('test', ['fest', 'jade:dev', 'copy:js_dev', 'copy:css', 'qunit:all']);
+  grunt.registerTask('dev', [
+    'fest',
+    'less:dev',
+    'postcss:dev',
+    'jade:dev',
+    'copy:img',
+    'copy:fonts',
+    'copy:js',
+    'copy:offline',
+    'concurrent:dev'
+  ]);
+  grunt.registerTask('build', [
+    'fest',
+    'less:build',
+    'postcss:build',
+    'jade:build',
+    'copy:img_build',
+    'copy:fonts_build',
+    'uglify:offline_build',
+    'requirejs:build',
+    'uglify:build'
+  ]);
+  grunt.registerTask('test', [
+    'fest',
+    'jade:dev',
+    'copy:js',
+    'copy:offline',
+    'qunit:all'
+  ]);
+  grunt.registerTask('build-server', ['build', 'shell:build']);
+  grunt.registerTask('default', ['build-server']);
 };

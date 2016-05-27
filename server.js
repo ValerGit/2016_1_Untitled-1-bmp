@@ -6,7 +6,7 @@ var proxy = require('http-proxy-middleware');
 
 var HOSTNAME = 'localhost',
     PORT = 8081,
-    PUBLIC_DIR = __dirname + '/dist';
+    PUBLIC_DIR = __dirname + '/' + (process.argv.length > 2 ? process.argv[2] : 'build-dev');
 
 var reqCounter = 0;
 

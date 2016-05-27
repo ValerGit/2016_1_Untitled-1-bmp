@@ -58,7 +58,9 @@ this.addEventListener('install', function(event) {
         '/js/vendor/require.js',
         '/js/config.js',
         '/js/main.min.js',
+        '/fonts/glyphicons-halflings-regular.woff',
         '/fonts/glyphicons-halflings-regular.woff2',
+        '/fonts/glyphicons-halflings-regular.ttf',
         '/img/logo/logo.svg'
       ]);
     })

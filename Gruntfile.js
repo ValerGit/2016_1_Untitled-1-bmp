@@ -43,6 +43,7 @@ module.exports = function (grunt) {
       // https://www.npmjs.com/package/grunt-requirejs
       prod: {
         options: {
+          almond: true,
           baseUrl: 'dist/js',
           mainConfigFile: 'dist/js/config.js',
           include: ['main'],

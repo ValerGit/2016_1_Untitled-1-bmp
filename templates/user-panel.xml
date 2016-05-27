@@ -3,18 +3,18 @@
         <ul class="user-panel__list">
             <fest:if test="data.isAuth">
                 <li class="user-panel__list-el">
-                    <i class="glyphicon glyphicon_user"></i>
+                    <i class="user-panel__icon user-panel__icon_user"></i>
                     <fest:space />
                     <fest:value>data.login</fest:value>
                 </li>
                 <li class="user-panel__list-el">
-                    <i class="glyphicon glyphicon_star"></i>
+                    <i class="user-panel__icon user-panel__icon_star"></i>
                     <fest:space />
                     <fest:value>data.score</fest:value>
                 </li>
                 <li class="user-panel__list-el">
                     <a href="#logout" class="js-logout">
-                        <i class="glyphicon glyphicon_remove"></i>
+                        <i class="user-panel__icon user-panel__icon_remove"></i>
                         <fest:space />
                         Выйти
                     </a>

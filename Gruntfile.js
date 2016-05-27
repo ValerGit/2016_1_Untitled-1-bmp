@@ -25,12 +25,16 @@ module.exports = function (grunt) {
     postcss: {
       // https://www.npmjs.com/package/grunt-postcss
       options: {
-        map: true,
         processors: [
-          require('autoprefixer')({ browsers: ['last 2 versions'] })
+          require('autoprefixer')({ browsers: ['last 2 versions'] }),
+          require('postcss-csso')({ comments: false })
         ]
       },
       dev: {
+        src: 'dist/css/main.css'
+      },
+
+      prod: {
         src: 'dist/css/main.css'
       }
     },
@@ -163,7 +167,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['assets/less/**/*'],
-        tasks: ['less:dev', 'postcss'],
+        tasks: ['less:dev', 'postcss:dev'],
         options: {
           interrupt: true,
           atBegin: true
@@ -241,7 +245,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('dev', ['concurrent:dev']);
-  grunt.registerTask('prod', ['fest', 'copy:css', 'less:prod', 'copy:fonts', 'copy:img', 'copy:js_dev', 'copy:offline', 'jade:prod', 'requirejs:prod', 'postcss:dev']);
+  grunt.registerTask('prod', ['fest', 'copy:css', 'less:prod', 'copy:fonts', 'copy:img', 'copy:js_dev', 'copy:offline', 'jade:prod', 'requirejs:prod', 'postcss:prod']);
   grunt.registerTask('prod-server', ['prod', 'shell']);
   grunt.registerTask('default', ['prod-server']);
   grunt.registerTask('test', ['fest', 'jade:dev', 'copy:js_dev', 'copy:css', 'qunit:all']);

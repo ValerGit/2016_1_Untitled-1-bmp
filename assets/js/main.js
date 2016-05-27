@@ -6,8 +6,6 @@ define(function(require) {
 
   var cache = require('cache');
 
-  var alertifyConfig = require('vendor/alertify-config');
-
   app.start(function() {
     router.init();
     Backbone.history.start();

@@ -33,7 +33,7 @@ this.addEventListener('fetch', function(event) {
 
       if(/\/api\/session/.test(url)) {
         return fetch(event.request).then(function(response) {
-          if(!response || !(response.status == 200 || response.status == 401)) {
+          if(!response || !(response.status == 200 || response.status == 401 || response.status == 400)) {
             throw Error('Offline');
           }
           return response;
@@ -59,7 +59,7 @@ this.addEventListener('install', function(event) {
         '/js/config.js',
         '/js/main.min.js',
         '/fonts/glyphicons-halflings-regular.woff2',
-        '/img/logo/logo.svg',
+        '/img/logo/logo.svg'
       ]);
     })
   );

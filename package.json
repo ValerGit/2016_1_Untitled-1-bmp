@@ -19,7 +19,8 @@
     "grunt-postcss": "^0.8.0",
     "grunt-requirejs": "^0.4.2",
     "grunt-shell": "^1.1.2",
-    "http-proxy-middleware": "^0.15.0"
+    "http-proxy-middleware": "^0.15.0",
+    "postcss-csso": "^1.1.2"
   },
   "repository": {
     "type": "git",

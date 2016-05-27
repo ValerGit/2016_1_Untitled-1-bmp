@@ -29,6 +29,6 @@ The server will listen to your request on `http://localhost:8081`
 
 4b. Build the project for production:
 ```
-grunt prod
+grunt build
 ```
-You'll find built project in `dist` directory.
+You'll find built project in `build` directory.

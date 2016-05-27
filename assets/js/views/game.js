@@ -136,7 +136,7 @@ define(function(require) {
       }
       else {
         if(this.connectionTries > 0) {
-          this.setStatus('Соединение с сервером восстанвлено. Восстанавливаем игру...');
+          this.setStatus('Соединение с сервером восстановлено. Восстанавливаем игру...');
           this.connectionTries = 0;
           this.gameSession.getStatus();
         }

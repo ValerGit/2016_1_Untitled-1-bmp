@@ -44,7 +44,7 @@ define(function(require) {
         if(result.id == 'offline' && this.offline) {
           this.user.set('id', 'offline');
           this.user.set('login', 'Гость');
-          this.user.set('score', cache.get('user-is-offline-score', 0));
+          this.user.set('score', require('cache').get('user-is-offline-score', 0));
           this.user.set('isAnonymous', true);
           this.user.set('isOffline', true);
           this.trigger('auth', this.getAuthData());

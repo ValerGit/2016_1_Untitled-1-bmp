@@ -23,9 +23,9 @@ npm install
 
 4a. Run developer server:
 ```
-grunt
+grunt dev
 ```
-The server will listen to your request on `http://localhost:8080`
+The server will listen to your request on `http://localhost:8081`
 
 4b. Build the project for production:
 ```

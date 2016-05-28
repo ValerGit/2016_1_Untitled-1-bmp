@@ -4,26 +4,15 @@ html
     title Морской бой
     if dev
       link(rel='stylesheet', href='/css/main.css')
+      link(rel='shortcut icon', href='/img/favicon/favicon-grey-64.ico')
     else
       link(rel='stylesheet', href='/css/main.min.css')
-    link(rel='shortcut icon', href='/img/favicon/favicon-grey-64.ico')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+      link(rel='shortcut icon', href='/favicon.ico')
+    meta(name='viewport', content='initial-scale=1.0,user-scalable=no,maximum-scale=1,minimum-scale=1')
 
     if dev
       script(src='/js/vendor/require.js', data-main='/js/main.js')
       script(src='/js/config.js')
-    else
-      script(src='/js/main.min.js')
-      script
-        require(['main']);
-      script
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/offline.js', { scope: './' }).then(function(reg) {
-              console.log('Registration succeeded. Scope is ' + reg.scope);
-          }).catch(function(error) {
-            console.log('Registration failed with ' + error);
-          });
-        }
 
   body
     #page
@@ -31,3 +20,15 @@ html
         .page-loader__container
           .page-loader__image
       .user-panel
+
+  script(src='/js/main.min.js')
+  script
+    require(['main']);
+  script
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/offline.js', { scope: './' }).then(function(reg) {
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+      }).catch(function(error) {
+        console.log('Registration failed with ' + error);
+      });
+    }

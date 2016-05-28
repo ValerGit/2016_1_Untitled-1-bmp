@@ -120,6 +120,10 @@ module.exports = function (grunt) {
         dest: 'build/img',
         expand: true
       },
+      favicon_build: {
+        src: 'assets/img/favicon/favicon-grey-64.ico',
+        dest: 'build/favicon.ico'
+      },
       js: {
         cwd: 'assets/js',
         src: [ '**' ],
@@ -260,6 +264,7 @@ module.exports = function (grunt) {
     'postcss:build',
     'jade:build',
     'copy:img_build',
+    'copy:favicon_build',
     'copy:fonts_build',
     'uglify:offline_build',
     'requirejs:build',

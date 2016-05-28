@@ -5,7 +5,7 @@
 require 'mina/git'
 
 set :domain, 'sbattle.ru'
-set :deploy_to, '/var/www/sbatle.ru'
+set :deploy_to, '/var/www/sbattle.ru'
 set :releases_path, 'releases'
 set :shared_path, 'shared'
 set :current_path, 'current'
@@ -33,7 +33,7 @@ namespace :post_deploy do
   desc "Installs npm packages."
   task :npm do
     queue %[echo "-----> installing npm packages"]
-    queue %[npm install &> /dev/null]
+    queue %[npm install --production 2>/dev/null]
   end
 
   desc "Creates static files."

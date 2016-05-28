@@ -121,7 +121,7 @@ module.exports = function (grunt) {
         expand: true
       },
       favicon_build: {
-        src: 'assets/img/favicon/favicon-grey-64.ico',
+        src: 'assets/img/favicon/favicon-grey-32.ico',
         dest: 'build/favicon.ico'
       },
       js: {

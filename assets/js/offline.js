@@ -54,9 +54,7 @@ this.addEventListener('install', function(event) {
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll([
         '/img/favicon/favicon-grey-64.ico',
-        '/css/main.css',
-        '/js/vendor/require.js',
-        '/js/config.js',
+        '/css/main.min.css',
         '/js/main.min.js',
         '/fonts/glyphicons-halflings-regular.woff',
         '/fonts/glyphicons-halflings-regular.woff2',

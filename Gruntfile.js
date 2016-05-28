@@ -26,7 +26,7 @@ module.exports = function (grunt) {
       // https://www.npmjs.com/package/grunt-postcss
       options: {
         processors: [
-          require('autoprefixer')({ browsers: ['last 2 versions'] }),
+          require('autoprefixer')({ browsers: ['last 5 versions'] }),
           require('cssnano')({ discardComments: { removeAll: true } })
         ]
       },

@@ -1,7 +1,4 @@
 define(function(require) {
-  var $ = require('jquery');
-  var _ = require('underscore');
-
   var Drawer = require('./scene-dots/drawer');
   var Shape = require('./scene-dots/shape');
   var shapeBuilder = require('./scene-dots/shapebuilder');

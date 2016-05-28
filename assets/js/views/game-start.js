@@ -1,5 +1,4 @@
 define(function(require) {
-  var _ = require('underscore');
 
   var app = require('app');
   var loader = require('loader');

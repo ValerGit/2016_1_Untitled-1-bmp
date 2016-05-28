@@ -1,6 +1,5 @@
 define(function(require) {
   var Backbone = require('backbone');
-  var _ = require('underscore');
 
   var MAX_HANDLING_NO_ITEM = 6;
 

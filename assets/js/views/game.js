@@ -6,7 +6,6 @@ define(function(require) {
   var scene = require('features/scene-chaos');
 
   var alertify = require('alertify');
-  var _ = require('underscore');
 
   var cache = require('cache');
 

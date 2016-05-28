@@ -1,6 +1,5 @@
 define(function(require) {
   var Backbone = require('backbone');
-  var _ = require('underscore');
 
   var GameField = Backbone.Model.extend({
     initialize: function(props) {

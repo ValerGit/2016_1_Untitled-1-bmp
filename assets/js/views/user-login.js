@@ -1,6 +1,5 @@
 define(function(require) {
   var View = require('views/base');
-  var _ = require('underscore');
   var app = require('app');
   var alertify = require('alertify');
   var cache = require('cache');

@@ -1,6 +1,4 @@
 define(function (require) {
-  var _ = require('underscore');
-
   var props = ['x', 'y', 'radius', 'alpha'];
 
   var DotState = function(args) {

@@ -1,6 +1,5 @@
 define(function(require) {
   var View = require('views/base');
-  var _ = require('underscore');
 
   var GameField = require('models/game/game-field');
 

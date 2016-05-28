@@ -1,6 +1,4 @@
 define(function(require) {
-  var _ = require('underscore');
-
   var Dot = require('./dot');
   var DotState = require('./dotstate');
   var DotConst = require('./dotconst');

@@ -1,6 +1,5 @@
 define(function (require) {
   var Backbone = require('backbone');
-  var _ = require('underscore');
   var app = require('app');
   var alertify = require('alertify');
   var MainView = require('views/main'),

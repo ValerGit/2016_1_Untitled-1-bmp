@@ -19,7 +19,7 @@ define(function(require) {
       }
 
       try {
-        var proto = window.protocol.protocol.indexOf("https:") == -1 ? 'ws' : 'wss';
+        var proto = window.location.protocol.indexOf("https:") == -1 ? 'ws' : 'wss';
         this.ws = new WebSocket(proto + '://' + window.location.host + '/gameplay');
         this.ws.onopen = this._onOpen.bind(this);
         this.ws.onclose = this._onClose.bind(this);

@@ -42,4 +42,10 @@ namespace :post_deploy do
     queue %[grunt build]
   end
 
+  desc "Fix file permissions."
+  task :perms do
+    queue %[echo "-----> fixing files permissions"]
+    queue %[sudo chown -R nikita:www-data /var/www/sbattle.ru/releases]
+  end
+
 end

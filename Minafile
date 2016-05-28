@@ -1,0 +1,45 @@
+###
+## Deploy script
+###
+
+require 'mina/git'
+
+set :domain, 'sbattle.ru'
+set :deploy_to, '/var/www/sbatle.ru'
+set :releases_path, 'releases'
+set :shared_path, 'shared'
+set :current_path, 'current'
+set :repository, 'https://github.com/ValerGit/2016_1_Untitled-1-bmp.git'
+set :branch, 'master'
+
+set :shared_paths, ['node_modules']
+
+task :setup  do
+  queue! %[mkdir -p "#{deploy_to}/shared/node_modules"]
+  queue %[sudo npm install -g grunt]
+end
+
+desc "Deploys the current version to the server."
+task :deploy do
+  deploy do
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'post_deploy:npm'
+    invoke :'post_deploy:grunt'
+  end
+end
+
+namespace :post_deploy do
+  desc "Installs npm packages."
+  task :npm do
+    queue %[echo "-----> installing npm packages"]
+    queue %[npm install &> /dev/null]
+  end
+
+  desc "Creates static files."
+  task :grunt do 
+    queue %[echo "-----> creating static files"]
+    queue %[grunt build]
+  end
+
+end

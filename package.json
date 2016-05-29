@@ -12,7 +12,6 @@
     "grunt-contrib-less": "^1.2.0",
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-fest": "^0.1.6",
-    "grunt-githash": "^0.1.3",
     "grunt-jade": "^0.5.1",
     "grunt-postcss": "^0.8.0",
     "grunt-requirejs": "^0.4.2"

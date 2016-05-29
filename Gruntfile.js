@@ -56,7 +56,7 @@ module.exports = function (grunt) {
     uglify: {
       // https://github.com/gruntjs/grunt-contrib-uglify
       options: {
-        banner: '/*<%= grunt.template.today("yyyymmddHHMMss") %>*/',
+        banner: 'var hash="<%= grunt.template.today("yyyymmddHHMMss") %>";',
       },
       offline_build: {
         files: {

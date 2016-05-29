@@ -11,6 +11,8 @@ define(function(require) {
 
       this.queue = new Queue(700);
       this.listenTo(this.queue, 'handle', this._onHandle.bind(this));
+
+      this.gameOver = false;
     },
 
     getProps: function() {
@@ -35,12 +37,17 @@ define(function(require) {
 
     _onConnection: function(res) {
       console.log('gameSession: connection', res);
-      this.trigger('connection', {
-        open: res.open
-      });
+      if(!this.gameOver) {
+        this.trigger('connection', {
+          open: res.open
+        });
+      }
     },
 
     _onMessage: function(msg) {
+      if(msg.type == 'game_over') {
+        this.gameOver = true;
+      }
       this.queue.push(msg);
     },
 

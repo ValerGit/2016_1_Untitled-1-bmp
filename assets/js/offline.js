@@ -1,4 +1,4 @@
-var CACHE_NAME = 'sea-battle-cache-v0';
+var CACHE_NAME = 'sea-battle-cache' + (hash !== undefined ? hash : '');
 
 var isOffline = false;
 

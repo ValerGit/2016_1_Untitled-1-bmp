@@ -53,8 +53,17 @@ module.exports = function (grunt) {
       }
     },
 
+    githash: {
+      main: {
+        options: {}
+      }
+    },
+
     uglify: {
       // https://github.com/gruntjs/grunt-contrib-uglify
+      options: {
+        banner: 'var hash="<%= githash.main.short %>";',
+      },
       offline_build: {
         files: {
           'build/offline.js': 'assets/js/offline.js'
@@ -235,6 +244,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-fest');
+  grunt.loadNpmTasks('grunt-githash');
   grunt.loadNpmTasks('grunt-jade');
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-requirejs');
@@ -266,6 +276,7 @@ module.exports = function (grunt) {
     'copy:img_build',
     'copy:favicon_build',
     'copy:fonts_build',
+    'githash:main',
     'uglify:offline_build',
     'requirejs:build',
     'uglify:build'

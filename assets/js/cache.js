@@ -1,7 +1,11 @@
 define(function(require) {
   var isSupported = function(storageName) {
     try {
-      return (storageName in window && window[storageName]);
+      if(storageName in window && window[storageName]) {
+        window[storageName].setItem('_test_', 1);
+        window[storageName].removeItem('_test_');
+        return true;
+      }
     }
     catch(e) {
       return false;

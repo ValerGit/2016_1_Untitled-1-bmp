@@ -32,7 +32,7 @@ define(function(require) {
     },
 
     setCaption: function(text) {
-      this.$caption.html(text);
+      this.$caption.text(text);
     },
 
     setCaptionInfo: function(text) {

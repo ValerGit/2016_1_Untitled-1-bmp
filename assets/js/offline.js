@@ -67,14 +67,10 @@ this.addEventListener('install', function(event) {
 
 this.addEventListener('activate', function(event) {
   var cacheWhitelist = [CACHE_NAME];
-  console.log('white list:', cacheWhitelist);
   event.waitUntil(
     caches.keys().then(function(keyList) {
-      console.log('keyList:', keyList);
       return Promise.all(keyList.map(function(key) {
-        console.log(key, cacheWhitelist.indexOf(key) === -1);
         if (cacheWhitelist.indexOf(key) === -1) {
-          console.log('delete key:', key);
           return caches.delete(key);
         }
       }));

@@ -53,6 +53,7 @@ this.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.addAll([
+        '/',
         '/favicon.ico',
         '/css/main.min.css',
         '/js/main.min.js',
